@@ -1,6 +1,10 @@
 homepage: "https://github.com/tiktok/gtm-template-eapi"
 documentation: "https://github.com/tiktok/gtm-template-eapi"
 versions:
+   - sha: 48bebeab9018af7dc2d737c14ade7440b492555b
+     changeNotes:
+      Version 0.1.6
+      Changed template display name.
    - sha: 96761be124e24809de560cb0f52d51f108b68157
      changeNotes:
       Version 0.1.5
