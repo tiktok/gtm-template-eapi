@@ -13,7 +13,7 @@ ___INFO___
   "id": "cvt_temp_public_id",
   "version": 1,
   "securityGroups": [],
-  "displayName": "TikTok Server-to-Server / Events API",
+  "displayName": "TikTok Events API (Official)",
   "categories": [
     "ADVERTISING",
     "ANALYTICS"
