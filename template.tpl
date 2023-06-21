@@ -565,7 +565,7 @@ const getCookieValues = require("getCookieValues");
 const setCookie = require("setCookie");
 const makeNumber = require("makeNumber");
 
-const gtmVersion = "s2s_0_1_5";
+const gtmVersion = "s2s_0_1_6";
 const eventData = getAllEventData();
 
 function isHashed(val) {
@@ -1104,7 +1104,7 @@ scenarios:
         }
       },
       "properties": {
-        "gtm_version": "s2s_0_1_5",
+        "gtm_version": "s2s_0_1_6",
         "contents": [
           {
             "content_id": "12345",
@@ -1191,7 +1191,7 @@ scenarios:
         }
       },
       "properties": {
-        "gtm_version": "s2s_0_1_5",
+        "gtm_version": "s2s_0_1_6",
         "contents": [
           {
             "content_id": "12345",
@@ -1264,7 +1264,7 @@ scenarios:
         }
       },
       "properties": {
-        "gtm_version": "s2s_0_1_5",
+        "gtm_version": "s2s_0_1_6",
         "contents": [
           {
             "content_id": "mycontentid",
