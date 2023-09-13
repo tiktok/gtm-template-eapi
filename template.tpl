@@ -603,7 +603,7 @@ const getCookieValues = require("getCookieValues");
 const setCookie = require("setCookie");
 const makeNumber = require("makeNumber");
 
-const gtmVersion = "s2s_0_1_7";
+const gtmVersion = "s2s_0_1_8";
 const eventData = getAllEventData();
 
 function isHashed(val) {
@@ -632,17 +632,34 @@ function hash(val, lowerCase) {
 }
 
 function getTtclidFromUrl() {
-  const url = eventData.page_location || eventData.page_referrer;
+  const locationData = getDataFromUrl(eventData.page_location);
+  if (locationData.ttclid) {
+    return decodeUriComponent(locationData.ttclid);
+  }
+
+  const referrerData = getDataFromUrl(eventData.page_referrer);
+  if (referrerData.ttclid && referrerData.hostname === locationData.hostname) {
+    return decodeUriComponent(referrerData.ttclid);
+  }
+  return null;
+}
+
+function getDataFromUrl(url) {
+  const result = {};
   if (!url) {
-    return null;
+    return result;
   }
 
   const parsed = parseUrl(url);
-  if (!parsed || !parsed.searchParams || !parsed.searchParams.ttclid) {
-    return null;
+  if (!parsed) {
+    return result;
   }
 
-  return decodeUriComponent(parsed.searchParams.ttclid);
+  if (parsed.searchParams && parsed.searchParams.ttclid) {
+    result.ttclid = parsed.searchParams.ttclid;
+  }
+  result.hostname = parsed.hostname;
+  return result;
 }
 
 function getTtclidCookie() {
@@ -1152,7 +1169,7 @@ scenarios:
         }
       },
       "properties": {
-        "gtm_version": "s2s_0_1_7",
+        "gtm_version": "s2s_0_1_8",
         "contents": [
           {
             "content_id": "12345",
@@ -1239,7 +1256,7 @@ scenarios:
         }
       },
       "properties": {
-        "gtm_version": "s2s_0_1_7",
+        "gtm_version": "s2s_0_1_8",
         "contents": [
           {
             "content_id": "12345",
@@ -1312,7 +1329,7 @@ scenarios:
         }
       },
       "properties": {
-        "gtm_version": "s2s_0_1_7",
+        "gtm_version": "s2s_0_1_8",
         "contents": [
           {
             "content_id": "mycontentid",
@@ -1460,6 +1477,76 @@ scenarios:
     assertThat(JSON.parse(RequestHistory[0].body).context.user.external_id).isEqualTo(
       '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4'
     );
+- name: TestTtclid
+  code: |
+    const logToConsole = require("logToConsole");
+
+    const mockData = {
+      pixel_code: '1234',
+      access_token: 'abcd',
+      event: 'ViewContent',
+      single_multi_product: 'single',
+      price: '123.01',
+      quantity: '2',
+      content_type: 'product_group',
+      content_id: 'mycontentid',
+      content_name: 'tshirt',
+      content_category: 'apparel',
+      value: '1000',
+      currency: 'USD',
+      phone: '1231231234',
+      email: 'test@test.com',
+    };
+
+    const tests = [
+      {
+        mockEventData: {
+          page_location: 'https://www.tiktok.com?ttclid=myttclid',
+        },
+        expectedReqBodyContextAd: {
+          "callback": "myttclid"
+        },
+      },
+      {
+        mockEventData: {
+          page_location: 'https://www.tiktok.com',
+          page_referrer: 'https://www.tiktok.com?ttclid=myttclid',
+        },
+        expectedReqBodyContextAd: {
+          "callback": "myttclid"
+        },
+      },
+      {
+        mockEventData: {
+          page_location: 'https://www.tiktok.com',
+          page_referrer: 'https://www.fake-tiktok.com?ttclid=myttclid',
+        },
+        expectedReqBodyContextAd: undefined,
+      },
+      {
+        mockEventData: {
+          page_location: 'https://www.tiktok.com',
+        },
+        expectedReqBodyContextAd: undefined,
+      },
+    ];
+
+    for (let i = 0; i < tests.length; i++) {
+      const testCase = tests[i];
+      mock('getAllEventData', () => {
+        return testCase.mockEventData;
+      });
+
+      // Call runCode to run the template's code.
+      runCode(mockData);
+
+      // Verify that the tag finished successfully.
+      assertApi('gtmOnSuccess').wasCalled();
+      assertThat(RequestHistory.length).isStrictlyEqualTo(i+1);
+
+      logToConsole(i, "actual:", JSON.parse(RequestHistory[i].body).context.ad, "expected:", testCase.expectedReqBodyContextAd);
+      assertThat(JSON.parse(RequestHistory[i].body).context.ad).isEqualTo(testCase.expectedReqBodyContextAd);
+    }
 setup: "const log = require('logToConsole');\nconst JSON = require('JSON');\nconst\
   \ sha256Sync = require(\"sha256Sync\");\n\nconst RequestHistory = [];\n\nmock('sendHttpRequest',\
   \ function() {\n  const url = arguments[0];\n  const callback = arguments[1];\n\
