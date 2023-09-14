@@ -570,6 +570,34 @@ ___TEMPLATE_PARAMETERS___
         "simpleValueType": true
       }
     ]
+  },
+  {
+    "type": "GROUP",
+    "name": "Section 7 - Log Settings",
+    "displayName": "Logs Settings",
+    "groupStyle": "ZIPPY_CLOSED",
+    "subParams": [
+      {
+        "type": "RADIO",
+        "name": "logType",
+        "displayName": "",
+        "radioItems": [
+          {
+            "value": "no",
+            "displayValue": "Do not log"
+          },
+          {
+            "value": "debug",
+            "displayValue": "Log to console during debug and preview"
+          },
+          {
+            "value": "always",
+            "displayValue": "Always log to console"
+          }
+        ],
+        "simpleValueType": true
+      }
+    ]
   }
 ]
 
@@ -602,9 +630,14 @@ const decodeUriComponent = require("decodeUriComponent");
 const getCookieValues = require("getCookieValues");
 const setCookie = require("setCookie");
 const makeNumber = require("makeNumber");
+const getContainerVersion = require('getContainerVersion');
+const getRequestHeader = require('getRequestHeader');
 
 const gtmVersion = "s2s_0_1_8";
 const eventData = getAllEventData();
+
+const isLoggingEnabled = determinateIsLoggingEnabled();
+const traceId = isLoggingEnabled ? getRequestHeader('trace-id') : undefined;
 
 function isHashed(val) {
   return val && val.match("^[A-Fa-f0-9]{64}$") != null;
@@ -694,21 +727,21 @@ function getTtp() {
 }
 
 function makeGAContent(item) {
-    const price = makeNumber(item.price);
-    const quantity = makeNumber(item.quantity || 1);
-    const category = item.item_category || item.item_category1 || item.item_category2;
+  const price = makeNumber(item.price);
+  const quantity = makeNumber(item.quantity || 1);
+  const category = item.item_category || item.item_category1 || item.item_category2;
 
-    const content = {};
-    content.content_type = 'product';
+  const content = {};
+  content.content_type = 'product';
 
-    if (item.item_id) content.content_id = item.item_id;
-    if (item.item_name) content.content_name = item.item_name;
-    if (price) content.price = price;
-    if (quantity) content.quantity = quantity;
-    if (category) content.content_category = category;
-    if (item.item_brand) content.brand = item.item_brand;
+  if (item.item_id) content.content_id = item.item_id;
+  if (item.item_name) content.content_name = item.item_name;
+  if (price) content.price = price;
+  if (quantity) content.quantity = quantity;
+  if (category) content.content_category = category;
+  if (item.item_brand) content.brand = item.item_brand;
 
-    return content;
+  return content;
 }
 
 function _getGaContents() {
@@ -724,7 +757,7 @@ function _getGaContents() {
   for (const item of eventData.items) {
     const content = makeGAContent(item);
     if (content) {
-        contents.push(content);
+      contents.push(content);
     }
   }
   return contents;
@@ -737,7 +770,7 @@ function makeDataContent(data) {
   content.content_type = data.content_type || 'product';
 
   if (data.content_id) content.content_id = data.content_id;
-  if (data.content_name) content.content_name = data.content_name;  
+  if (data.content_name) content.content_name = data.content_name;
   if (price) content.price = price;
   if (quantity) content.quantity = quantity;
   if (data.content_category) content.content_category = data.content_category;
@@ -855,7 +888,7 @@ function getBody(ttclid, ttp) {
   if (value) properties.value = value;
   if (description) properties.description = description;
   if (query) properties.query = query;
-    
+
   // Additional Object Properties
   if (data.custom_properties && data.custom_properties.length > 0) {
     for (let i = 0; i < data.custom_properties.length; i++) {
@@ -863,26 +896,48 @@ function getBody(ttclid, ttp) {
       properties[objectParam.key] = objectParam.value;
     }
   }
-  
+
   properties.gtm_version = gtmVersion;
   body.properties = properties;
 
   return body;
 }
 
-function send(accessToken, body, onSuccess, onFailure) {
+function send(accessToken, requestBody, onSuccess, onFailure) {
   const url = "https://business-api.tiktok.com/open_api/v1.3/pixel/track/";
   const headers = {
     "Content-Type": "application/json",
     "Access-Token": accessToken,
   };
-  logToConsole("sending to Events API:", body);
+  if (isLoggingEnabled) {
+    logToConsole(
+      JSON.stringify({
+        Name: 'TikTok',
+        Type: 'Request',
+        TraceId: traceId,
+        EventName: requestBody.event,
+        RequestMethod: 'POST',
+        RequestUrl: url,
+        RequestBody: requestBody,
+      })
+    );
+  }
   sendHttpRequest(
     url,
     (statusCode, headers, body) => {
-      logToConsole("Events API response statusCode", statusCode);
-      logToConsole("Events API response headers", headers);
-      logToConsole("Events API response body", body);
+      if (isLoggingEnabled) {
+        logToConsole(
+          JSON.stringify({
+            Name: 'TikTok',
+            Type: 'Response',
+            TraceId: traceId,
+            EventName: requestBody.event,
+            ResponseStatusCode: statusCode,
+            ResponseHeaders: headers,
+            ResponseBody: body,
+          })
+        );
+      }
       if (statusCode >= 200 && statusCode < 400) {
         onSuccess();
       } else {
@@ -893,7 +948,7 @@ function send(accessToken, body, onSuccess, onFailure) {
       headers: headers,
       method: "POST",
     },
-    JSON.stringify(body)
+    JSON.stringify(requestBody)
   );
 }
 
@@ -908,8 +963,29 @@ function main() {
   send(accessToken, body, data.gtmOnSuccess, data.gtmOnFailure);
 }
 
-logToConsole("eventData:", eventData);
 main();
+
+function determinateIsLoggingEnabled() {
+  const containerVersion = getContainerVersion();
+  const isDebug = !!(
+    containerVersion &&
+    (containerVersion.debugMode || containerVersion.previewMode)
+  );
+
+  if (!data.logType) {
+    return isDebug;
+  }
+
+  if (data.logType === 'no') {
+    return false;
+  }
+
+  if (data.logType === 'debug') {
+    return isDebug;
+  }
+
+  return data.logType === 'always';
+}
 
 
 ___SERVER_PERMISSIONS___
@@ -1093,6 +1169,81 @@ ___SERVER_PERMISSIONS___
     },
     "clientAnnotations": {
       "isEditedByUser": true
+    },
+    "isRequired": true
+  },
+  {
+    "instance": {
+      "key": {
+        "publicId": "read_request",
+        "versionId": "1"
+      },
+      "param": [
+        {
+          "key": "headerWhitelist",
+          "value": {
+            "type": 2,
+            "listItem": [
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "headerName"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "trace-id"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "key": "headersAllowed",
+          "value": {
+            "type": 8,
+            "boolean": true
+          }
+        },
+        {
+          "key": "requestAccess",
+          "value": {
+            "type": 1,
+            "string": "specific"
+          }
+        },
+        {
+          "key": "headerAccess",
+          "value": {
+            "type": 1,
+            "string": "specific"
+          }
+        },
+        {
+          "key": "queryParameterAccess",
+          "value": {
+            "type": 1,
+            "string": "any"
+          }
+        }
+      ]
+    },
+    "clientAnnotations": {
+      "isEditedByUser": true
+    },
+    "isRequired": true
+  },
+  {
+    "instance": {
+      "key": {
+        "publicId": "read_container_data",
+        "versionId": "1"
+      },
+      "param": []
     },
     "isRequired": true
   }
