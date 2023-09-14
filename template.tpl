@@ -633,7 +633,7 @@ const makeNumber = require("makeNumber");
 const getContainerVersion = require('getContainerVersion');
 const getRequestHeader = require('getRequestHeader');
 
-const gtmVersion = "s2s_0_1_8";
+const gtmVersion = "s2s_0_1_9";
 const eventData = getAllEventData();
 
 const isLoggingEnabled = determinateIsLoggingEnabled();
@@ -1320,7 +1320,7 @@ scenarios:
         }
       },
       "properties": {
-        "gtm_version": "s2s_0_1_8",
+        "gtm_version": "s2s_0_1_9",
         "contents": [
           {
             "content_id": "12345",
@@ -1407,7 +1407,7 @@ scenarios:
         }
       },
       "properties": {
-        "gtm_version": "s2s_0_1_8",
+        "gtm_version": "s2s_0_1_9",
         "contents": [
           {
             "content_id": "12345",
@@ -1480,7 +1480,7 @@ scenarios:
         }
       },
       "properties": {
-        "gtm_version": "s2s_0_1_8",
+        "gtm_version": "s2s_0_1_9",
         "contents": [
           {
             "content_id": "mycontentid",

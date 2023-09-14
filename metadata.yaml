@@ -1,6 +1,10 @@
 homepage: "https://github.com/tiktok/gtm-template-eapi"
 documentation: "https://github.com/tiktok/gtm-template-eapi"
 versions:
+   - sha: 493bdbd0a05cf470d2c94b4a652b99a8230622ef
+     changeNotes:
+      Version 0.1.9
+      Add support of Server logging standard.
    - sha: ff96c0cecde9e1cfb0c8327824a52b06121d1062
      changeNotes:
       Version 0.1.8
