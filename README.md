@@ -11,6 +11,12 @@ If you haven't completed this setup, please refer to Google's server-side taggin
 # Setup
 ## 1. Install the Template
 You can find our pixel from [Google Tag Manager Template Gallery](https://tagmanager.google.com/gallery/#/owners/tiktok/templates/gtm-template-pixel). Click "Add to workspace" to install it into your workspace.
+![f6e24f039e40cbd88fa593761d00cde9](https://github.com/tiktok/gtm-template-eapi/assets/142284144/8cd9ef7c-7c45-4134-a954-3079eb0b92f1)
+
+
+Note that the template can only be applied to a Server container. Therefore, you need to ensure that the Container Type of your container is Server.
+![7bafae94ec6b319f2b5ac1abe51665b7](https://github.com/tiktok/gtm-template-eapi/assets/142284144/bc9c1ebe-bf46-4aac-a0ff-f53dc796258e)
+
 
 ## 2. Create Pixel & Events API Access Token
 You'll need a Pixel ID and an API Access Token to use this template. To create these, follow the steps below: 
