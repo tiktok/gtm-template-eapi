@@ -633,7 +633,7 @@ const makeNumber = require("makeNumber");
 const getContainerVersion = require('getContainerVersion');
 const getRequestHeader = require('getRequestHeader');
 
-const gtmVersion = "s2s_0_1_9";
+const gtmVersion = "s2s_0_1_10";
 const eventData = getAllEventData();
 
 const isLoggingEnabled = determinateIsLoggingEnabled();
@@ -847,7 +847,7 @@ function getBody(ttclid, ttp) {
   const _external_id = data.external_id || data.sha256_external_id || eventData.user_id;
   const _phone = data.phone || data.sha256_phone || (eventData.user_data && eventData.user_data.phone_number);
   const _email = data.email || data.sha256_email || eventData.email || (eventData.user_data && eventData.user_data.email_address);
-  const _ip = eventData.ip_override || eventData.ip_adress || eventData.ip;
+  const _ip = eventData.ip_override || eventData.ip;
 
   const body = {};
   body.partner_name = "GoogleTagManagerServer";
