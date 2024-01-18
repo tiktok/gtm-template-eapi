@@ -1,8 +1,8 @@
 homepage: "https://github.com/tiktok/gtm-template-eapi"
 documentation: "https://github.com/tiktok/gtm-template-eapi"
 versions:
-  - sha: 9ab23c7338c005221356239ba6738c230f353ba5
-    changeNotes:
+   - sha: 9ab23c7338c005221356239ba6738c230f353ba5
+     changeNotes:
       Version 0.1.10
       Remove ip_address condition check
    - sha: 2c0505ebd7826793c8e70c91d1913a09113b15bc
