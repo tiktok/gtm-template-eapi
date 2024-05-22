@@ -61,7 +61,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "SELECT",
         "name": "event",
-        "displayName": "Trigger Event",
+        "displayName": "Event Name",
         "macrosInSelect": true,
         "selectItems": [
           {
@@ -122,359 +122,425 @@ ___TEMPLATE_PARAMETERS___
           }
         ],
         "simpleValueType": true,
-        "help": "TikTok supports 14 standard events. You may refer to our \u003ca href\u003d\"https://ads.tiktok.com/help/article?aid\u003d10028\"\u003edocumentation\u003c/a\u003e and choose a suitable event to tag."
-      },
-      {
-        "type": "TEXT",
-        "name": "test_event_code",
-        "displayName": "Test Event Code",
-        "simpleValueType": true,
-        "help": "After Events API setup, you can test if your events have been setup and received correctly by TikTok. \u003ca href\u003d\"https://ads.tiktok.com/marketing_api/docs?id\u003d1739584863252481\"\u003e Learn More\u003c/a\u003e"
-      }
-    ]
-  },
-  {
-    "type": "GROUP",
-    "name": "Section 2 - Advanced Matching Configurations",
-    "displayName": "Advanced Matching Configurations",
-    "groupStyle": "NO_ZIPPY",
-    "subParams": [
-      {
-        "type": "RADIO",
-        "name": "hash",
-        "displayName": "Hashed / Non-Hashed AM Parameters",
-        "radioItems": [
-          {
-            "value": "hashed",
-            "displayValue": "SHA256 AM Parameters"
-          },
-          {
-            "value": "non-hashed",
-            "displayValue": "Plain AM Parameters",
-            "help": "TikTok Pixel will hash plain email and phone for you"
-          }
-        ],
-        "simpleValueType": true,
-        "enablingConditions": []
-      },
-      {
-        "type": "TEXT",
-        "name": "email",
-        "displayName": "Email",
-        "simpleValueType": true,
-        "enablingConditions": [
-          {
-            "paramName": "hash",
-            "paramValue": "non-hashed",
-            "type": "EQUALS"
-          }
-        ]
-      },
-      {
-        "type": "TEXT",
-        "name": "phone",
-        "displayName": "Phone",
-        "simpleValueType": true,
-        "enablingConditions": [
-          {
-            "paramName": "hash",
-            "paramValue": "non-hashed",
-            "type": "EQUALS"
-          }
-        ],
-        "help": "If the country code is 86, then do not include country code (example: 13800000000). Otherwise, include country code with + and remove any other characters (spaces, \u0027-\u0027) between numbers (example for US: +12133734253)."
-      },
-      {
-        "type": "TEXT",
-        "name": "external_id",
-        "displayName": "External ID",
-        "simpleValueType": true,
-        "enablingConditions": [
-          {
-            "paramName": "hash",
-            "paramValue": "non-hashed",
-            "type": "EQUALS"
-          }
-        ],
-        "help": "Any unique identifier on the advertiser\u0027s side, such as loyalty membership ID, user ID, or external cookie ID."
-      },
-      {
-        "type": "TEXT",
-        "name": "sha256_email",
-        "displayName": "SHA256 Hashed Email",
-        "simpleValueType": true,
-        "enablingConditions": [
-          {
-            "paramName": "hash",
-            "paramValue": "hashed",
-            "type": "EQUALS"
-          }
-        ]
-      },
-      {
-        "type": "TEXT",
-        "name": "sha256_phone",
-        "displayName": "SHA256 Hashed Phone",
-        "simpleValueType": true,
-        "enablingConditions": [
-          {
-            "paramName": "hash",
-            "paramValue": "hashed",
-            "type": "EQUALS"
-          }
-        ],
-        "help": "If the country code is 86, then do not include country code (example: 13800000000). Otherwise, include country code with + and remove any other characters (spaces, \u0027-\u0027) between numbers (example for US: +12133734253)."
-      },
-      {
-        "type": "TEXT",
-        "name": "sha256_external_id",
-        "displayName": "SHA256 Hashed External ID",
-        "simpleValueType": true,
-        "enablingConditions": [
-          {
-            "paramName": "hash",
-            "paramValue": "hashed",
-            "type": "EQUALS"
-          }
-        ],
-        "help": "Any unique identifier on the advertiser\u0027s side, such as loyalty membership ID, user ID, or external cookie ID."
+        "help": "TikTok supports 14 standard events. You may refer to our \u003ca href\u003d\"https://ads.tiktok.com/help/article?aid\u003d10028\" target\u003d\"_blank\"\u003edocumentation\u003c/a\u003e and choose a suitable event to tag.",
+        "defaultValue": "{{Event Name}}"
       }
     ],
-    "help": "Advance matching parameters are hashed and then shared with TikTok to help attribute more conversions to your ads and improve ad retargeting"
+    "help": "\u003ca href\u003d\"https://business-api.tiktok.com/portal/docs?id\u003d1799004006287425\" target\u003d\"_blank\"\u003eLearn more\u003c/a\u003e about using TikTok Pixel with Google Tag Manager."
   },
   {
     "type": "GROUP",
-    "name": "Section 3 - Object Properties",
-    "displayName": "Object Properties",
+    "name": "Section 3 - Parameter Override",
+    "displayName": "Parameter Override",
     "groupStyle": "ZIPPY_CLOSED",
     "subParams": [
       {
         "type": "LABEL",
-        "name": "Object Properties Description",
-        "displayName": "Configure and send \u003ca href\u003d\"https://ads.tiktok.com/help/article?aid\u003d10028\"\u003eadditional parameters\u003c/a\u003e to TikTok for to improve Ad performance and unlock Ad features."
+        "name": "Parameter Override Description",
+        "displayName": "\u003ca target\u003d\"_blank\" href\u003d\"https://business-api.tiktok.com/portal/docs?id\u003d1799004110681154#item-link-How%20to%20set%20up%20deduplication\"\u003eLearn more\u003c/a\u003e about manually configuring event parameters. This overrides parameters fetched from \u003ca target\u003d\"_blank\" href\u003d\"https://business-api.tiktok.com/portal/docs?id\u003d1799004097478658#item-link-Set%20up%20a%20GA4%20Event%20tag\"\u003eGA4 Event Parameters\u003c/a\u003e."
       },
       {
-        "type": "RADIO",
-        "name": "object_property_source",
-        "displayName": "",
-        "radioItems": [
+        "type": "GROUP",
+        "name": "Test Event Configurations",
+        "displayName": "Test Event Configurations",
+        "groupStyle": "NO_ZIPPY",
+        "subParams": [
           {
-            "value": "ga",
-            "displayValue": "Use Google Analytics E-commerce Data Layers",
-            "help": "If you have Google\u0027s \u003ca href\u003d\"https://developers.google.com/analytics/devguides/collection/ga4/ecommerce?client_type\u003dgtm#implementation\"\u003eEnhanced E-Commerce\u003c/a\u003e or \u003ca href\u003d\"https://support.google.com/tagmanager/answer/6107169?hl\u003den#standard-ecommerce\"\u003e Standard E-Commerce (Deprecated)\u003c/a\u003e Data Layers set up to collect information about the shopping behavior of your users. TikTok will automatically collect these data as parameters to help you improve your ad performance."
+            "type": "TEXT",
+            "name": "test_event_code",
+            "displayName": "Test Event Code",
+            "simpleValueType": true,
+            "help": "After Events API setup, you can test if your events have been setup and received correctly by TikTok. \u003ca href\u003d\"https://business-api.tiktok.com/portal/docs?id\u003d1799004129683458#item-link-Verify%20TikTok%20Events%20API%20Setup\" target\u003d\"_blank\"\u003e Learn More\u003c/a\u003e"
+          }
+        ]
+      },
+      {
+        "type": "GROUP",
+        "name": "Advanced Matching Configurations",
+        "displayName": "Advanced Matching Configurations",
+        "groupStyle": "NO_ZIPPY",
+        "subParams": [
+          {
+            "type": "RADIO",
+            "name": "hash",
+            "displayName": "Hashed / Non-Hashed AM Parameters",
+            "radioItems": [
+              {
+                "value": "hashed",
+                "displayValue": "SHA256 AM Parameters"
+              },
+              {
+                "value": "non-hashed",
+                "displayValue": "Plain AM Parameters",
+                "help": "TikTok Pixel will hash plain email and phone for you"
+              }
+            ],
+            "simpleValueType": true,
+            "enablingConditions": []
           },
           {
-            "value": "custom",
-            "displayValue": "Use Custom Data"
-          }
-        ],
-        "simpleValueType": true,
-        "help": "",
-        "defaultValue": "ga"
-      },
-      {
-        "type": "RADIO",
-        "name": "single_multi_product",
-        "displayName": "Custom Data Settings",
-        "radioItems": [
-          {
-            "value": "single",
-            "displayValue": "Single Content"
+            "type": "TEXT",
+            "name": "email",
+            "displayName": "Email",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "hash",
+                "paramValue": "non-hashed",
+                "type": "EQUALS"
+              }
+            ]
           },
           {
-            "value": "multiple",
-            "displayValue": "Multiple Contents",
-            "help": "Send a list of contents as a JSON string. \u003ca href\u003d\"https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON\"\u003eLearn more about JSON\u003c/a\u003e"
+            "type": "TEXT",
+            "name": "phone",
+            "displayName": "Phone",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "hash",
+                "paramValue": "non-hashed",
+                "type": "EQUALS"
+              }
+            ],
+            "help": "If the country code is 86, then do not include country code (example: 13800000000). Otherwise, include country code with + and remove any other characters (spaces, \u0027-\u0027) between numbers (example for US: +12133734253)."
           },
           {
-            "value": "empty",
-            "displayValue": "Order Info Only"
-          }
-        ],
-        "simpleValueType": true,
-        "enablingConditions": [
-          {
-            "paramName": "object_property_source",
-            "paramValue": "custom",
-            "type": "EQUALS"
-          }
-        ]
-      },
-      {
-        "type": "TEXT",
-        "name": "contents",
-        "displayName": "contents",
-        "simpleValueType": true,
-        "enablingConditions": [
-          {
-            "paramName": "single_multi_product",
-            "paramValue": "multiple",
-            "type": "EQUALS"
-          }
-        ],
-        "help": "Please make sure \"contents\" is a \u003cb\u003evalid JSON string\u003c/b\u003e. \u003ca href\u003d\"https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON\"\u003eLearn more about JSON\u003c/a\u003e",
-        "valueHint": "[{\"content_id\": \"abc\", \"price\": 10, \"quantity\": 1}]"
-      },
-      {
-        "type": "TEXT",
-        "name": "content_id",
-        "displayName": "content_id",
-        "simpleValueType": true,
-        "enablingConditions": [
-          {
-            "paramName": "single_multi_product",
-            "paramValue": "single",
-            "type": "EQUALS"
-          }
-        ],
-        "help": "Optional: ID of the product item"
-      },
-      {
-        "type": "SELECT",
-        "name": "content_type",
-        "displayName": "content_type",
-        "macrosInSelect": true,
-        "selectItems": [
-          {
-            "value": "product",
-            "displayValue": "product"
+            "type": "TEXT",
+            "name": "external_id",
+            "displayName": "External ID",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "hash",
+                "paramValue": "non-hashed",
+                "type": "EQUALS"
+              }
+            ],
+            "help": "Any unique identifier on the advertiser\u0027s side, such as loyalty membership ID, user ID, or external cookie ID."
           },
           {
-            "value": "product_group",
-            "displayValue": "product_group"
+            "type": "TEXT",
+            "name": "sha256_email",
+            "displayName": "SHA256 Hashed Email",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "hash",
+                "paramValue": "hashed",
+                "type": "EQUALS"
+              }
+            ]
+          },
+          {
+            "type": "TEXT",
+            "name": "sha256_phone",
+            "displayName": "SHA256 Hashed Phone",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "hash",
+                "paramValue": "hashed",
+                "type": "EQUALS"
+              }
+            ],
+            "help": "If the country code is 86, then do not include country code (example: 13800000000). Otherwise, include country code with + and remove any other characters (spaces, \u0027-\u0027) between numbers (example for US: +12133734253)."
+          },
+          {
+            "type": "TEXT",
+            "name": "sha256_external_id",
+            "displayName": "SHA256 Hashed External ID",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "hash",
+                "paramValue": "hashed",
+                "type": "EQUALS"
+              }
+            ],
+            "help": "Any unique identifier on the advertiser\u0027s side, such as loyalty membership ID, user ID, or external cookie ID."
           }
         ],
-        "simpleValueType": true,
-        "enablingConditions": [
+        "help": "Advance matching parameters are hashed and then shared with TikTok to help attribute more conversions to your ads and improve ad retargeting. \u003cbr\u003e \u003ca target\u003d\"_blank\" href\u003d\"https://business-api.tiktok.com/portal/docs?id\u003d1799004110681154#item-link-User%20data\"\u003eLearn more\u003c/a\u003e about how to format Advanced Matching parameters."
+      },
+      {
+        "type": "GROUP",
+        "name": "Properties",
+        "displayName": "Properties (e.g. product data)",
+        "groupStyle": "NO_ZIPPY",
+        "subParams": [
           {
-            "paramName": "single_multi_product",
-            "paramValue": "single",
-            "type": "EQUALS"
+            "type": "RADIO",
+            "name": "object_property_source",
+            "displayName": "",
+            "radioItems": [
+              {
+                "value": "ga",
+                "displayValue": "Use Google Analytics E-commerce Data Layers",
+                "help": "If you have Google\u0027s \u003ca href\u003d\"https://developers.google.com/analytics/devguides/collection/ga4/ecommerce?client_type\u003dgtm#implementation\" target\u003d\"_blank\"\u003eEnhanced E-Commerce\u003c/a\u003e or \u003ca href\u003d\"https://support.google.com/tagmanager/answer/6107169?hl\u003den#standard-ecommerce\" target\u003d\"_blank\"\u003e Standard E-Commerce (Deprecated)\u003c/a\u003e Data Layers set up to collect information about the shopping behavior of your users. TikTok will automatically collect these data as parameters to help you improve your ad performance."
+              },
+              {
+                "value": "custom",
+                "displayValue": "Use Custom Data"
+              }
+            ],
+            "simpleValueType": true,
+            "help": "",
+            "defaultValue": "ga"
+          },
+          {
+            "type": "RADIO",
+            "name": "single_multi_product",
+            "displayName": "Custom Data Settings",
+            "radioItems": [
+              {
+                "value": "single",
+                "displayValue": "Single Content"
+              },
+              {
+                "value": "multiple",
+                "displayValue": "Multiple Contents",
+                "help": "Send a list of contents as a JSON string. \u003ca href\u003d\"https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON\" target\u003d\"_blank\"\u003eLearn more about JSON\u003c/a\u003e"
+              },
+              {
+                "value": "empty",
+                "displayValue": "No Contents"
+              }
+            ],
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "object_property_source",
+                "paramValue": "custom",
+                "type": "EQUALS"
+              }
+            ]
+          },
+          {
+            "type": "TEXT",
+            "name": "contents",
+            "displayName": "contents",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "single_multi_product",
+                "paramValue": "multiple",
+                "type": "EQUALS"
+              }
+            ],
+            "help": "Please make sure \"contents\" is a \u003cb\u003evalid JSON string\u003c/b\u003e. \u003ca href\u003d\"https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON\" target\u003d\"_blank\"\u003eLearn more about JSON\u003c/a\u003e",
+            "valueHint": "[{\"content_id\": \"abc\", \"price\": 10, \"quantity\": 1}]"
+          },
+          {
+            "type": "TEXT",
+            "name": "content_id",
+            "displayName": "content_id",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "single_multi_product",
+                "paramValue": "single",
+                "type": "EQUALS"
+              }
+            ],
+            "help": "Optional: ID of the product item"
+          },
+          {
+            "type": "SELECT",
+            "name": "content_type",
+            "displayName": "content_type",
+            "macrosInSelect": true,
+            "selectItems": [
+              {
+                "value": "product",
+                "displayValue": "product"
+              },
+              {
+                "value": "product_group",
+                "displayValue": "product_group"
+              }
+            ],
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "single_multi_product",
+                "paramValue": "single",
+                "type": "EQUALS"
+              }
+            ],
+            "help": "Optional: The content_type object property\u0027s value must be set to either product, or product_group, depending on how you will configure your data feed when you set up your product catalog. If you will be tracking events associated with individual products, set the value to product. If you are tracking events associated with product groups, set it to product_group instead.",
+            "notSetText": ""
+          },
+          {
+            "type": "TEXT",
+            "name": "content_name",
+            "displayName": "content_name",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "single_multi_product",
+                "paramValue": "single",
+                "type": "EQUALS"
+              }
+            ]
+          },
+          {
+            "type": "TEXT",
+            "name": "content_category",
+            "displayName": "content_category",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "single_multi_product",
+                "paramValue": "single",
+                "type": "EQUALS"
+              }
+            ]
+          },
+          {
+            "type": "TEXT",
+            "name": "price",
+            "displayName": "price",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "single_multi_product",
+                "paramValue": "single",
+                "type": "EQUALS"
+              }
+            ],
+            "help": "Optional: Price of item"
+          },
+          {
+            "type": "TEXT",
+            "name": "quantity",
+            "displayName": "quantity",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "single_multi_product",
+                "paramValue": "single",
+                "type": "EQUALS"
+              }
+            ]
+          },
+          {
+            "type": "TEXT",
+            "name": "value",
+            "displayName": "value",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "object_property_source",
+                "paramValue": "custom",
+                "type": "EQUALS"
+              }
+            ],
+            "help": "Optional: Value of the order"
+          },
+          {
+            "type": "TEXT",
+            "name": "currency",
+            "displayName": "currency",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "object_property_source",
+                "paramValue": "custom",
+                "type": "EQUALS"
+              }
+            ],
+            "help": "Optional: ISO 4217 code. Examples: \"EUR\", \"USD\", \"JPY\". See \u003ca href\u003d\"https://ads.tiktok.com/help/article?aid\u003d10028\" target\u003d\"_blank\"\u003ehere\u003c/a\u003e for a list of currencies supported."
+          },
+          {
+            "type": "TEXT",
+            "name": "description",
+            "displayName": "description",
+            "simpleValueType": true,
+            "help": "Optional: A string description of the web event",
+            "enablingConditions": [
+              {
+                "paramName": "object_property_source",
+                "paramValue": "custom",
+                "type": "EQUALS"
+              }
+            ]
+          },
+          {
+            "type": "TEXT",
+            "name": "brand",
+            "displayName": "brand",
+            "simpleValueType": true,
+            "help": "Optional: The brand of the item",
+            "enablingConditions": [
+              {
+                "paramName": "object_property_source",
+                "paramValue": "custom",
+                "type": "EQUALS"
+              }
+            ]
+          },
+          {
+            "type": "TEXT",
+            "name": "query",
+            "displayName": "query",
+            "simpleValueType": true,
+            "help": "Optional: The text string that was searched for. For instance, a person searches for a product on your website, you can forward the keyword being searched here.",
+            "enablingConditions": [
+              {
+                "paramName": "object_property_source",
+                "paramValue": "custom",
+                "type": "EQUALS"
+              }
+            ]
           }
         ],
-        "help": "Optional: The content_type object property\u0027s value must be set to either product, or product_group, depending on how you will configure your data feed when you set up your product catalog. If you will be tracking events associated with individual products, set the value to product. If you are tracking events associated with product groups, set it to product_group instead.",
-        "notSetText": ""
+        "help": "Configure and send \u003ca href\u003d\"https://business-api.tiktok.com/portal/docs?id\u003d1799004110681154#item-link-Product%20data\" target\u003d\"_blank\"\u003eadditional parameters\u003c/a\u003e to TikTok for to improve Ad performance and unlock Ad features."
       },
       {
-        "type": "TEXT",
-        "name": "content_name",
-        "displayName": "content_name",
-        "simpleValueType": true,
-        "enablingConditions": [
+        "type": "GROUP",
+        "name": "De-duplication Configurations",
+        "displayName": "De-duplication Configurations",
+        "groupStyle": "NO_ZIPPY",
+        "subParams": [
           {
-            "paramName": "single_multi_product",
-            "paramValue": "single",
-            "type": "EQUALS"
-          }
-        ]
-      },
-      {
-        "type": "TEXT",
-        "name": "price",
-        "displayName": "price",
-        "simpleValueType": true,
-        "enablingConditions": [
-          {
-            "paramName": "single_multi_product",
-            "paramValue": "single",
-            "type": "EQUALS"
+            "type": "TEXT",
+            "name": "event_id",
+            "displayName": "Event ID",
+            "simpleValueType": true
           }
         ],
-        "help": "Optional: Price of item"
+        "help": "If you use both TikTok Pixel template and Events API template to send events, you can set up Event ID to deduplicate the two sources. \u003ca target\u003d\"_blank\" href\u003d\"https://business-api.tiktok.com/portal/docs?id\u003d1799004097478658#item-link-How%20to%20set%20up%20deduplication\"\u003eLearn more\u003c/a\u003e about how to set up deduplication."
       },
       {
-        "type": "TEXT",
-        "name": "quantity",
-        "displayName": "quantity",
-        "simpleValueType": true,
-        "enablingConditions": [
+        "type": "GROUP",
+        "name": "Other Configurations",
+        "displayName": "Other Configurations",
+        "groupStyle": "NO_ZIPPY",
+        "subParams": [
           {
-            "paramName": "single_multi_product",
-            "paramValue": "single",
-            "type": "EQUALS"
-          }
-        ]
-      },
-      {
-        "type": "TEXT",
-        "name": "currency",
-        "displayName": "currency",
-        "simpleValueType": true,
-        "enablingConditions": [
+            "type": "TEXT",
+            "name": "url",
+            "displayName": "Page URL",
+            "simpleValueType": true
+          },
           {
-            "paramName": "object_property_source",
-            "paramValue": "custom",
-            "type": "EQUALS"
-          }
-        ],
-        "help": "Optional: ISO 4217 code. Examples: \"EUR\", \"USD\", \"JPY\". See \u003ca href\u003d\"https://ads.tiktok.com/help/article?aid\u003d10028\"\u003ehere \u003c/a\u003efor a list of currencies supported."
-      },
-      {
-        "type": "TEXT",
-        "name": "value",
-        "displayName": "value",
-        "simpleValueType": true,
-        "enablingConditions": [
+            "type": "TEXT",
+            "name": "referrer",
+            "displayName": "Page Referrer",
+            "simpleValueType": true
+          },
           {
-            "paramName": "object_property_source",
-            "paramValue": "custom",
-            "type": "EQUALS"
-          }
-        ],
-        "help": "Optional: Value of the order"
-      },
-      {
-        "type": "TEXT",
-        "name": "content_category",
-        "displayName": "content_category",
-        "simpleValueType": true,
-        "enablingConditions": [
+            "type": "TEXT",
+            "name": "ip",
+            "displayName": "IP",
+            "simpleValueType": true
+          },
           {
-            "paramName": "single_multi_product",
-            "paramValue": "single",
-            "type": "EQUALS"
-          }
-        ]
-      },
-      {
-        "type": "TEXT",
-        "name": "description",
-        "displayName": "description",
-        "simpleValueType": true,
-        "help": "Optional: A string description of the web event",
-        "enablingConditions": [
-          {
-            "paramName": "object_property_source",
-            "paramValue": "custom",
-            "type": "EQUALS"
-          }
-        ]
-      },
-      {
-        "type": "TEXT",
-        "name": "brand",
-        "displayName": "brand",
-        "simpleValueType": true,
-        "help": "Optional: The brand of the item",
-        "enablingConditions": [
-          {
-            "paramName": "object_property_source",
-            "paramValue": "custom",
-            "type": "EQUALS"
-          }
-        ]
-      },
-      {
-        "type": "TEXT",
-        "name": "query",
-        "displayName": "query",
-        "simpleValueType": true,
-        "help": "Optional: The text string that was searched for. For instance, a person searches for a product on your website, you can forward the keyword being searched here.",
-        "enablingConditions": [
-          {
-            "paramName": "object_property_source",
-            "paramValue": "custom",
-            "type": "EQUALS"
+            "type": "TEXT",
+            "name": "user_agent",
+            "displayName": "User Agent",
+            "simpleValueType": true
           }
         ]
       }
@@ -482,14 +548,14 @@ ___TEMPLATE_PARAMETERS___
   },
   {
     "type": "GROUP",
-    "name": "Section 4 - Additional Object Properties",
-    "displayName": "Additional Object Properties",
+    "name": "Section 2 - Additional Properties",
+    "displayName": "Additional Properties",
     "groupStyle": "ZIPPY_CLOSED",
     "subParams": [
       {
         "type": "LABEL",
         "name": "Description",
-        "displayName": "You may configure and send more custom object parameters to TikTok to unlock additional Ad features targeted at specific verticals (i.e. Travel)"
+        "displayName": "You may configure and send more custom parameters to TikTok to unlock additional Ad features targeted at specific verticals (i.e. Travel)"
       },
       {
         "type": "PARAM_TABLE",
@@ -520,67 +586,13 @@ ___TEMPLATE_PARAMETERS___
   },
   {
     "type": "GROUP",
-    "name": "Section 5 - De-duplication Configurations",
-    "displayName": "De-duplication Configurations",
-    "groupStyle": "ZIPPY_CLOSED",
-    "subParams": [
-      {
-        "type": "TEXT",
-        "name": "event_id",
-        "displayName": "Event ID",
-        "simpleValueType": true,
-        "help": "Deduplication with event_id  is required if you use this template together with Events API. See \u003ca href\u003d\"https://ads.tiktok.com/help/article?aid\u003d10012410\"\u003ehere \u003c/a\u003e for instructions on deduplication"
-      }
-    ]
-  },
-  {
-    "type": "GROUP",
-    "name": "Section 6 - Other Configurations",
-    "displayName": "Other Configurations (Optional)",
-    "groupStyle": "ZIPPY_CLOSED",
-    "subParams": [
-      {
-        "type": "TEXT",
-        "name": "url",
-        "displayName": "Page URL",
-        "simpleValueType": true
-      },
-      {
-        "type": "TEXT",
-        "name": "referrer",
-        "displayName": "Page Referrer",
-        "simpleValueType": true
-      },
-      {
-        "type": "TEXT",
-        "name": "ip",
-        "displayName": "IP",
-        "simpleValueType": true
-      },
-      {
-        "type": "TEXT",
-        "name": "user_agent",
-        "displayName": "User Agent",
-        "simpleValueType": true
-      },
-      {
-        "type": "TEXT",
-        "name": "timestamp",
-        "displayName": "Timestamp",
-        "simpleValueType": true
-      }
-    ]
-  },
-  {
-    "type": "GROUP",
-    "name": "Section 7 - Log Settings",
+    "name": "Section 4 - Log Settings",
     "displayName": "Logs Settings",
     "groupStyle": "ZIPPY_CLOSED",
     "subParams": [
       {
         "type": "RADIO",
         "name": "logType",
-        "displayName": "",
         "radioItems": [
           {
             "value": "no",
@@ -595,7 +607,9 @@ ___TEMPLATE_PARAMETERS___
             "displayValue": "Always log to console"
           }
         ],
-        "simpleValueType": true
+        "simpleValueType": true,
+        "defaultValue": "debug",
+        "displayName": ""
       }
     ]
   }
@@ -632,12 +646,26 @@ const setCookie = require("setCookie");
 const makeNumber = require("makeNumber");
 const getContainerVersion = require('getContainerVersion');
 const getRequestHeader = require('getRequestHeader');
+const getTimestampMillis = require("getTimestampMillis");
+const Math = require("Math");
 
-const gtmVersion = "s2s_0_1_10";
+const gtmVersion = "s2s_0_2_01";
 const eventData = getAllEventData();
 
 const isLoggingEnabled = determinateIsLoggingEnabled();
 const traceId = isLoggingEnabled ? getRequestHeader('trace-id') : undefined;
+
+const TTEventMap = {
+  'add_payment_info': 'AddPaymentInfo',
+  'add_to_cart': 'AddToCart',
+  'add_to_wishlist': 'AddToWishlist',
+  'begin_checkout': 'InitiateCheckout',
+  'page_view': 'Pageview',
+  'purchase': 'CompletePayment',
+  'search': 'Search',
+  'sign_up': 'CompleteRegistration',
+  'view_item': 'ViewContent',
+};
 
 function isHashed(val) {
   return val && val.match("^[A-Fa-f0-9]{64}$") != null;
@@ -661,7 +689,7 @@ function hash(val, lowerCase) {
     return undefined;
   }
 
-  return sha256Sync(val, {outputEncoding: 'hex'});
+  return sha256Sync(val, { outputEncoding: 'hex' });
 }
 
 function getTtclidFromUrl() {
@@ -718,7 +746,7 @@ function getTtpCookie() {
 
 function getTtclid() {
   return (
-    getTtclidFromUrl() || data.ttclid || eventData.ttclid || getTtclidCookie()
+    getTtclidFromUrl() || getTtclidCookie() || data.ttclid || eventData.ttclid
   );
 }
 
@@ -732,7 +760,7 @@ function makeGAContent(item) {
   const category = item.item_category || item.item_category1 || item.item_category2;
 
   const content = {};
-  content.content_type = 'product';
+  content.content_type = eventData.tt_content_type || 'product';
 
   if (item.item_id) content.content_id = item.item_id;
   if (item.item_name) content.content_name = item.item_name;
@@ -744,17 +772,16 @@ function makeGAContent(item) {
   return content;
 }
 
-function _getGaContents() {
+function _getGaContents(items) {
   // Standard Ecommerce: https://developers.google.com/analytics/devguides/collection/ga4/ecommerce?client_type=gtm
   // Enhanced Ecommerce: https://developers.google.com/analytics/devguides/collection/ua/gtm/enhanced-ecommerce#details
   // Both formats are normalized by the server-side "GA4 Client" or "UA Client"
-  const contents = [];
-
-  if (!eventData || !eventData.items) {
-    return contents;
+  if (!items) {
+    return undefined;
   }
 
-  for (const item of eventData.items) {
+  const contents = [];
+  for (const item of items) {
     const content = makeGAContent(item);
     if (content) {
       contents.push(content);
@@ -767,7 +794,7 @@ function makeDataContent(data) {
   const price = makeNumber(data.price);
   const quantity = makeNumber(data.quantity || 1);
   const content = {};
-  content.content_type = data.content_type || 'product';
+  content.content_type = eventData.tt_content_type || data.content_type || 'product';
 
   if (data.content_id) content.content_id = data.content_id;
   if (data.content_name) content.content_name = data.content_name;
@@ -779,8 +806,8 @@ function makeDataContent(data) {
   return content;
 }
 
-function getContents() {
-  const gaContents = _getGaContents();
+function getContents(items) {
+  const gaContents = _getGaContents(items);
 
   if (data.object_property_source == "ga") {
     return gaContents;
@@ -788,7 +815,14 @@ function getContents() {
 
   if (data.single_multi_product == "multiple") {
     // Note: JSON.parse returns undefined if the string is not valid.
-    return JSON.parse(data.contents) || data.contents;
+    const contents = JSON.parse(data.contents);
+    if (contents) {
+      for (const c of contents) {
+        if (!c.content_type) c.content_type = eventData.tt_content_type || 'product';
+      }
+      return contents;
+    }
+    return data.contents;
   }
 
   if (data.single_multi_product == "single") {
@@ -801,16 +835,13 @@ function getContents() {
     return gaContents;
   }
 
-  return [];
+  return undefined;
 }
 
 function getValue(contents) {
-  if (data.value !== undefined) {
-    return makeNumber(data.value);
-  }
-
-  if (eventData.value !== undefined) {
-    return makeNumber(eventData.value);
+  var val = makeNumber(data.value) || makeNumber(eventData.value);
+  if (val) {
+    return val;
   }
 
   if (contents && contents.length > 0) {
@@ -826,13 +857,13 @@ function getValue(contents) {
   return undefined;
 }
 
-function getCurrency() {
+function getCurrency(items) {
   if (data.currency || eventData.currency) {
     return data.currency || eventData.currency;
   }
 
-  if (eventData.items) {
-    for (const item of eventData.items) {
+  if (items) {
+    for (const item of items) {
       if (item && item.currency !== undefined) {
         return item.currency;
       }
@@ -842,44 +873,78 @@ function getCurrency() {
   return undefined;
 }
 
+function getItems() {
+  if (eventData.items) {
+    return eventData.items;
+  }
+
+  if (eventData.tt_contents) {
+    const contents = JSON.parse(eventData.tt_contents);
+    if (contents) {
+      return contents;
+    }
+  }
+
+  return undefined;
+}
 
 function getBody(ttclid, ttp) {
-  const _external_id = data.external_id || data.sha256_external_id || eventData.user_id;
-  const _phone = data.phone || data.sha256_phone || (eventData.user_data && eventData.user_data.phone_number);
-  const _email = data.email || data.sha256_email || eventData.email || (eventData.user_data && eventData.user_data.email_address);
+  const _external_id = data.external_id || data.sha256_external_id || eventData.tt_external_id || eventData.user_id;
+  const _phone = data.phone ||
+    data.sha256_phone ||
+    (eventData.user_data && (eventData.user_data.phone_number || eventData.user_data.sha256_phone_number));
+  const _email = data.email ||
+    data.sha256_email ||
+    (eventData.user_data && (eventData.user_data.email_address || eventData.user_data.sha256_email_address)) ||
+    eventData.email;
   const _ip = eventData.ip_override || eventData.ip;
+  const _event = data.event || eventData.event_name;
 
-  const body = {};
-  body.partner_name = "GoogleTagManagerServer";
+  const body = {
+    event_source: "web",
+    partner_name: "GoogleTagManagerServer",
+  };
+  const bodyData = {
+    event_time: Math.floor(getTimestampMillis() / 1000),
+  };
 
-  if (data.pixel_code) body.pixel_code = data.pixel_code;
-  if (data.event) body.event = data.event;
-  if (data.event_id) body.event_id = data.event_id;
-  if (data.timestamp) body.timestamp = data.timestamp;
+  if (data.pixel_code) body.event_source_id = data.pixel_code;
+  if (_event) bodyData.event = TTEventMap[_event] || _event;
+  if (data.event_id || eventData.event_id) bodyData.event_id = data.event_id || eventData.event_id;
   if (data.test_event_code) body.test_event_code = data.test_event_code;
-
-  const context = {};
-  if (ttclid) context.ad = {callback: ttclid};
-  body.context = context;
 
   const page = {};
   if (eventData.page_location) page.url = eventData.page_location;
   if (eventData.page_referrer) page.referrer = eventData.page_referrer;
-  body.context.page = page;
+  bodyData.page = page;
 
   const user = {};
+  if (ttclid) user.ttclid = ttclid;
   if (_external_id) user.external_id = hash(_external_id, false);
-  if (_phone) user.phone_number = hash(_phone, true);
+  if (_phone) user.phone = hash(_phone, true);
   if (_email) user.email = hash(_email, true);
   if (ttp) user.ttp = ttp;
-  body.context.user = user;
+  if (_ip) user.ip = _ip;
+  if (eventData.user_agent) user.user_agent = eventData.user_agent;
+  bodyData.user = user;
 
-  if (_ip) body.context.ip = _ip;
-  if (eventData.user_agent) body.context.user_agent = eventData.user_agent;
+  const device = {};
+  if (eventData.client_hints) {
+    const ch = eventData.client_hints;
+    if (ch.architecture) device.architecture = ch.architecture;
+    if (ch.bitness) device.bitness = ch.bitness;
+    if (ch.full_version_list) device.browser_version_list = ch.full_version_list;
+    if (ch.mobile != undefined) device.mobile = ch.mobile;
+    if (ch.model) device.model = ch.model;
+    if (ch.platform) device.platform = ch.platform;
+    if (ch.platform_version) device.platform_version = ch.platform_version;
+  }
+  bodyData.device = device;
 
   const properties = {};
-  const contents = getContents();
-  const currency = getCurrency();
+  const items = getItems();
+  const contents = getContents(items);
+  const currency = getCurrency(items);
   const value = getValue(contents);
   const description = data.description;
   const query = data.query || eventData.query || eventData.search_term;
@@ -888,7 +953,6 @@ function getBody(ttclid, ttp) {
   if (value) properties.value = value;
   if (description) properties.description = description;
   if (query) properties.query = query;
-
   // Additional Object Properties
   if (data.custom_properties && data.custom_properties.length > 0) {
     for (let i = 0; i < data.custom_properties.length; i++) {
@@ -896,15 +960,16 @@ function getBody(ttclid, ttp) {
       properties[objectParam.key] = objectParam.value;
     }
   }
-
   properties.gtm_version = gtmVersion;
-  body.properties = properties;
+  properties.event_trigger_source = 'GoogleTagManagerServer';
+  bodyData.properties = properties;
 
+  body.data = [bodyData];
   return body;
 }
 
 function send(accessToken, requestBody, onSuccess, onFailure) {
-  const url = "https://business-api.tiktok.com/open_api/v1.3/pixel/track/";
+  const url = "https://business-api.tiktok.com/open_api/v1.3/event/track/";
   const headers = {
     "Content-Type": "application/json",
     "Access-Token": accessToken,
@@ -1269,22 +1334,22 @@ scenarios:
       },
       items: [
         {
-            "item_name": "Test T-Shirt",
-            "item_id": "12345",
-            "price": 15.25,
-            "item_brand": "testbrand",
-            "item_category": "Apparel",
-            "item_variant": "Red",
-            "quantity": 1
+          "item_name": "Test T-Shirt",
+          "item_id": "12345",
+          "price": 15.25,
+          "item_brand": "testbrand",
+          "item_category": "Apparel",
+          "item_variant": "Red",
+          "quantity": 1
         },
         {
-            "item_name": "Test Pants",
-            "item_id": "67890",
-            "price": 33.33,
-            "item_brand": "testbrand",
-            "item_category": "Apparel",
-            "item_variant": "Blue",
-            "quantity": 1
+          "item_name": "Test Pants",
+          "item_id": "67890",
+          "price": 33.33,
+          "item_brand": "testbrand",
+          "item_category": "Apparel",
+          "item_variant": "Blue",
+          "quantity": 1
         },
       ],
       currency: 'USD',
@@ -1303,49 +1368,59 @@ scenarios:
     assertThat(RequestHistory.length).isStrictlyEqualTo(1);
 
     const expectedReqHeader = {
-      "Content-Type":"application/json",
-      "Access-Token":"abcd"
+      "Content-Type": "application/json",
+      "Access-Token": "abcd"
     };
     assertThat(RequestHistory[0].headers).isEqualTo(expectedReqHeader);
 
     const expectedReqBody = {
-      "partner_name": "GoogleTagManagerServer",
-      "pixel_code": "1234",
-      "event": "ViewContent",
-      "context": {
-        "page": { "url": "https://www.tiktok.com" },
-        "user": {
-          "phone_number": "065f45b37b5dad20b5a67158468161cdf35b1ae3cda2a666e7852feab7424897",
-          "email": "f660ab912ec121d1b1e928a0bb4bc61b15f5ad44d5efdc4e1c92a25e99b8e44a"
-        }
-      },
-      "properties": {
-        "gtm_version": "s2s_0_1_9",
-        "contents": [
-          {
-            "content_id": "12345",
-            "content_name": "Test T-Shirt",
-            "price": 15.25,
-            "quantity": 1,
-            "content_type": "product",
-            "content_category": "Apparel",
-            "brand": "testbrand"
+      "data": [
+        {
+          "device": {},
+          "event": "ViewContent",
+          "event_time": 0,
+          "page": {
+            "url": "https://www.tiktok.com"
           },
-          {
-            "content_id": "67890",
-            "content_name": "Test Pants",
-            "price": 33.33,
-            "quantity": 1,
-            "content_type": "product",
-            "content_category": "Apparel",
-            "brand": "testbrand"
+          "properties": {
+            "contents": [
+              {
+                "brand": "testbrand",
+                "content_category": "Apparel",
+                "content_id": "12345",
+                "content_name": "Test T-Shirt",
+                "content_type": "product",
+                "price": 15.25,
+                "quantity": 1
+              },
+              {
+                "brand": "testbrand",
+                "content_category": "Apparel",
+                "content_id": "67890",
+                "content_name": "Test Pants",
+                "content_type": "product",
+                "price": 33.33,
+                "quantity": 1
+              }
+            ],
+            "currency": "USD",
+            "event_trigger_source": "GoogleTagManagerServer",
+            "gtm_version": "s2s_0_2_01",
+            "value": 99.99
+          },
+          "user": {
+            "email": "f660ab912ec121d1b1e928a0bb4bc61b15f5ad44d5efdc4e1c92a25e99b8e44a",
+            "phone": "065f45b37b5dad20b5a67158468161cdf35b1ae3cda2a666e7852feab7424897"
           }
-        ],
-        "currency": "USD",
-        "value": 99.99
-      }
+        }
+      ],
+      "event_source": "web",
+      "event_source_id": "1234",
+      "partner_name": "GoogleTagManagerServer"
     };
-    assertThat(JSON.parse(RequestHistory[0].body)).isEqualTo(expectedReqBody);
+    var actual = JSON.parse(RequestHistory[0].body);
+    actual.data[0].event_time = 0;
+    assertThat(actual).isEqualTo(expectedReqBody);
 - name: TestGAAutofillValueAndCurrency
   code: |-
     const mockData = {
@@ -1396,43 +1471,53 @@ scenarios:
     assertThat(RequestHistory.length).isStrictlyEqualTo(1);
 
     const expectedReqBody = {
+      "event_source": "web",
       "partner_name": "GoogleTagManagerServer",
-      "pixel_code": "1234",
-      "event": "ViewContent",
-      "context": {
-        "page": { "url": "https://www.tiktok.com" },
-        "user": {
-          "phone_number": "065f45b37b5dad20b5a67158468161cdf35b1ae3cda2a666e7852feab7424897",
-          "email": "f660ab912ec121d1b1e928a0bb4bc61b15f5ad44d5efdc4e1c92a25e99b8e44a"
-        }
-      },
-      "properties": {
-        "gtm_version": "s2s_0_1_9",
-        "contents": [
-          {
-            "content_id": "12345",
-            "content_name": "Test T-Shirt",
-            "price": 15.25,
-            "quantity": 1,
-            "content_type": "product",
-            "content_category": "Apparel",
-            "brand": "testbrand"
+      "event_source_id": "1234",
+      "data": [
+        {
+          "event_time": 0,
+          "event": "ViewContent",
+          "page": {
+            "url": "https://www.tiktok.com"
           },
-          {
-            "content_id": "67890",
-            "content_name": "Test Pants",
-            "price": 33.33,
-            "quantity": 2,
-            "content_type": "product",
-            "content_category": "Apparel",
-            "brand": "testbrand"
+          "user": {
+            "phone": "065f45b37b5dad20b5a67158468161cdf35b1ae3cda2a666e7852feab7424897",
+            "email": "f660ab912ec121d1b1e928a0bb4bc61b15f5ad44d5efdc4e1c92a25e99b8e44a"
+          },
+          "device": {},
+          "properties": {
+            "contents": [
+              {
+                "content_type": "product",
+                "content_id": "12345",
+                "content_name": "Test T-Shirt",
+                "price": 15.25,
+                "quantity": 1,
+                "content_category": "Apparel",
+                "brand": "testbrand"
+              },
+              {
+                "content_type": "product",
+                "content_id": "67890",
+                "content_name": "Test Pants",
+                "price": 33.33,
+                "quantity": 2,
+                "content_category": "Apparel",
+                "brand": "testbrand"
+              }
+            ],
+            "currency": "USD",
+            "value": 81.91,
+            "gtm_version": "s2s_0_2_01",
+            "event_trigger_source": "GoogleTagManagerServer"
           }
-        ],
-        "currency": "USD",
-        "value": 81.91,
-      }
+        }
+      ]
     };
-    assertThat(JSON.parse(RequestHistory[0].body)).isEqualTo(expectedReqBody);
+    var actual = JSON.parse(RequestHistory[0].body);
+    actual.data[0].event_time = 0;
+    assertThat(actual).isEqualTo(expectedReqBody);
 - name: TestManualSingleContentUrlTtclid
   code: |-
     const mockData = {
@@ -1468,34 +1553,44 @@ scenarios:
     assertThat(RequestHistory.length).isStrictlyEqualTo(1);
 
     const expectedReqBody = {
+      "event_source": "web",
       "partner_name": "GoogleTagManagerServer",
-      "pixel_code": "1234",
-      "event": "ViewContent",
-      "context": {
-        "ad": { "callback": "myttclid" },
-        "page": { "url": "https://www.tiktok.com?ttclid=myttclid" },
-        "user": {
-          "phone_number": "065f45b37b5dad20b5a67158468161cdf35b1ae3cda2a666e7852feab7424897",
-          "email": "f660ab912ec121d1b1e928a0bb4bc61b15f5ad44d5efdc4e1c92a25e99b8e44a"
-        }
-      },
-      "properties": {
-        "gtm_version": "s2s_0_1_9",
-        "contents": [
-          {
-            "content_id": "mycontentid",
-            "content_name": "tshirt",
-            "price": 123.01,
-            "quantity": 2,
-            "content_type": "product_group",
-            "content_category": "apparel"
+      "event_source_id": "1234",
+      "data": [
+        {
+          "event_time": 0,
+          "event": "ViewContent",
+          "page": {
+            "url": "https://www.tiktok.com?ttclid=myttclid"
+          },
+          "user": {
+            "ttclid": "myttclid",
+            "phone": "065f45b37b5dad20b5a67158468161cdf35b1ae3cda2a666e7852feab7424897",
+            "email": "f660ab912ec121d1b1e928a0bb4bc61b15f5ad44d5efdc4e1c92a25e99b8e44a"
+          },
+          "device": {},
+          "properties": {
+            "contents": [
+              {
+                "content_type": "product_group",
+                "content_id": "mycontentid",
+                "content_name": "tshirt",
+                "price": 123.01,
+                "quantity": 2,
+                "content_category": "apparel"
+              }
+            ],
+            "currency": "USD",
+            "value": 1000,
+            "gtm_version": "s2s_0_2_01",
+            "event_trigger_source": "GoogleTagManagerServer"
           }
-        ],
-        "currency": "USD",
-        "value": 1000,
-      }
+        }
+      ]
     };
-    assertThat(JSON.parse(RequestHistory[0].body)).isEqualTo(expectedReqBody);
+    var actual = JSON.parse(RequestHistory[0].body);
+    actual.data[0].event_time = 0;
+    assertThat(actual).isEqualTo(expectedReqBody);
 - name: TestPIIHashAndCleaning
   code: |-
     const mockData = {
@@ -1520,13 +1615,14 @@ scenarios:
     assertApi('gtmOnSuccess').wasCalled();
     assertThat(RequestHistory.length).isStrictlyEqualTo(1);
 
-    assertThat(JSON.parse(RequestHistory[0].body).context.user.phone_number).isEqualTo(
+    const actualBody = JSON.parse(RequestHistory[0].body);
+    assertThat(actualBody.data[0].user.phone).isEqualTo(
       sha256Sync('1231231234', {outputEncoding: 'hex'})
     );
-    assertThat(JSON.parse(RequestHistory[0].body).context.user.email).isEqualTo(
+    assertThat(actualBody.data[0].user.email).isEqualTo(
       sha256Sync('test@test.com', {outputEncoding: 'hex'})
     );
-    assertThat(JSON.parse(RequestHistory[0].body).context.user.external_id).isEqualTo(
+    assertThat(actualBody.data[0].user.external_id).isEqualTo(
       sha256Sync('UserABC', {outputEncoding: 'hex'})
     );
 - name: TestPIIMissing
@@ -1553,13 +1649,14 @@ scenarios:
     assertApi('gtmOnSuccess').wasCalled();
     assertThat(RequestHistory.length).isStrictlyEqualTo(1);
 
-    assertThat(JSON.parse(RequestHistory[0].body).context.user.phone_number).isEqualTo(
+    const actualBody = JSON.parse(RequestHistory[0].body);
+    assertThat(actualBody.data[0].user.phone).isEqualTo(
       undefined
     );
-    assertThat(JSON.parse(RequestHistory[0].body).context.user.email).isEqualTo(
+    assertThat(actualBody.data[0].user.email).isEqualTo(
       undefined
     );
-    assertThat(JSON.parse(RequestHistory[0].body).context.user.external_id).isEqualTo(
+    assertThat(actualBody.data[0].user.external_id).isEqualTo(
       undefined
     );
 - name: TestPIIHashed
@@ -1586,13 +1683,14 @@ scenarios:
     assertApi('gtmOnSuccess').wasCalled();
     assertThat(RequestHistory.length).isStrictlyEqualTo(1);
 
-    assertThat(JSON.parse(RequestHistory[0].body).context.user.phone_number).isEqualTo(
+    const actualBody = JSON.parse(RequestHistory[0].body);
+    assertThat(actualBody.data[0].user.phone).isEqualTo(
       '065f45b37b5dad20b5a67158468161cdf35b1ae3cda2a666e7852feab7424897'
     );
-    assertThat(JSON.parse(RequestHistory[0].body).context.user.email).isEqualTo(
+    assertThat(actualBody.data[0].user.email).isEqualTo(
       '7dcb0cd247aa94896e665c337696a7be18d387a78d6d55b4854b7ff7d5925042'
     );
-    assertThat(JSON.parse(RequestHistory[0].body).context.user.external_id).isEqualTo(
+    assertThat(actualBody.data[0].user.external_id).isEqualTo(
       '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4'
     );
 - name: TestPIIPlainButHashed
@@ -1619,13 +1717,14 @@ scenarios:
     assertApi('gtmOnSuccess').wasCalled();
     assertThat(RequestHistory.length).isStrictlyEqualTo(1);
 
-    assertThat(JSON.parse(RequestHistory[0].body).context.user.phone_number).isEqualTo(
+    const actualBody = JSON.parse(RequestHistory[0].body);
+    assertThat(actualBody.data[0].user.phone).isEqualTo(
       '065f45b37b5dad20b5a67158468161cdf35b1ae3cda2a666e7852feab7424897'
     );
-    assertThat(JSON.parse(RequestHistory[0].body).context.user.email).isEqualTo(
+    assertThat(actualBody.data[0].user.email).isEqualTo(
       '7dcb0cd247aa94896e665c337696a7be18d387a78d6d55b4854b7ff7d5925042'
     );
-    assertThat(JSON.parse(RequestHistory[0].body).context.user.external_id).isEqualTo(
+    assertThat(actualBody.data[0].user.external_id).isEqualTo(
       '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4'
     );
 - name: TestTtclid
@@ -1654,31 +1753,27 @@ scenarios:
         mockEventData: {
           page_location: 'https://www.tiktok.com?ttclid=myttclid',
         },
-        expectedReqBodyContextAd: {
-          "callback": "myttclid"
-        },
+        expectedTtclid: "myttclid",
       },
       {
         mockEventData: {
           page_location: 'https://www.tiktok.com',
           page_referrer: 'https://www.tiktok.com?ttclid=myttclid',
         },
-        expectedReqBodyContextAd: {
-          "callback": "myttclid"
-        },
+        expectedTtclid: "myttclid",
       },
       {
         mockEventData: {
           page_location: 'https://www.tiktok.com',
           page_referrer: 'https://www.fake-tiktok.com?ttclid=myttclid',
         },
-        expectedReqBodyContextAd: undefined,
+        expectedTtclid: undefined,
       },
       {
         mockEventData: {
           page_location: 'https://www.tiktok.com',
         },
-        expectedReqBodyContextAd: undefined,
+        expectedTtclid: undefined,
       },
     ];
 
@@ -1695,9 +1790,90 @@ scenarios:
       assertApi('gtmOnSuccess').wasCalled();
       assertThat(RequestHistory.length).isStrictlyEqualTo(i+1);
 
-      logToConsole(i, "actual:", JSON.parse(RequestHistory[i].body).context.ad, "expected:", testCase.expectedReqBodyContextAd);
-      assertThat(JSON.parse(RequestHistory[i].body).context.ad).isEqualTo(testCase.expectedReqBodyContextAd);
+      const actualTtclid = JSON.parse(RequestHistory[i].body).data[0].user.ttclid;
+      logToConsole(i, "actual:", actualTtclid, "expected:", testCase.expectedTtclid);
+      assertThat(actualTtclid).isEqualTo(testCase.expectedTtclid);
     }
+- name: TestEcommerceParsing
+  code: |-
+    const mockData = {
+      pixel_code: '1234',
+      access_token: 'abcd',
+    };
+
+    const mockEventData = {
+      event_name: 'add_payment_info',
+      page_location: 'https://www.tiktok.com',
+      user_data: {
+        phone_number: '1231231234',
+        email_address: 'test@test.com',
+      },
+      tt_contents: '[{"item_name":"Test T-Shirt","item_id":"12345","price":15.25,"item_brand":"testbrand","item_category":"Apparel","item_variant":"Red","quantity":1,"currency":"USD"},{"item_name":"Test Pants","item_id":"67890","price":33.33,"item_brand":"testbrand","item_category":"Apparel","item_variant":"Blue","quantity":2,"currency":"USD"}]',
+      client_hints: {
+        architecture: "x86",
+        bitness: "64",
+        full_version_list: [
+          { "brand": "Google Chrome", "version": "111.0.5563.115" },
+          { "brand": "Not(A:Brand", "version": "8.0.0.0" },
+          { "brand": "Chromium", "version": "111.0.5563.115" }
+        ],
+        mobile: true,
+        model: "Nokia 7.2",
+        platform: "Android",
+        platform_version: "11.2.1"
+      }
+    };
+
+    mock('getAllEventData', () => {
+      return mockEventData;
+    });
+
+    // Call runCode to run the template's code.
+    runCode(mockData);
+
+    // Verify that the tag finished successfully.
+    assertApi('gtmOnSuccess').wasCalled();
+    assertThat(RequestHistory.length).isStrictlyEqualTo(1);
+
+    // Verify request data
+    const actualReqBody = JSON.parse(RequestHistory[0].body);
+    assertThat(actualReqBody.data[0].event).isEqualTo('AddPaymentInfo');
+    assertThat(actualReqBody.data[0].device).isEqualTo({
+      architecture: "x86",
+      bitness: "64",
+      browser_version_list: [
+        { "brand": "Google Chrome", "version": "111.0.5563.115" },
+        { "brand": "Not(A:Brand", "version": "8.0.0.0" },
+        { "brand": "Chromium", "version": "111.0.5563.115" }
+      ],
+      mobile: true,
+      model: "Nokia 7.2",
+      platform: "Android",
+      platform_version: "11.2.1"
+    });
+    assertThat(actualReqBody.data[0].properties.event_trigger_source).isEqualTo('GoogleTagManagerServer');
+    assertThat(actualReqBody.data[0].properties.value).isEqualTo(81.91);
+    assertThat(actualReqBody.data[0].properties.currency).isEqualTo('USD');
+    assertThat(actualReqBody.data[0].properties.contents).isEqualTo([
+      {
+        "content_id": "12345",
+        "content_name": "Test T-Shirt",
+        "price": 15.25,
+        "quantity": 1,
+        "content_type": "product",
+        "content_category": "Apparel",
+        "brand": "testbrand"
+      },
+      {
+        "content_id": "67890",
+        "content_name": "Test Pants",
+        "price": 33.33,
+        "quantity": 2,
+        "content_type": "product",
+        "content_category": "Apparel",
+        "brand": "testbrand"
+      }
+    ]);
 setup: "const log = require('logToConsole');\nconst JSON = require('JSON');\nconst\
   \ sha256Sync = require(\"sha256Sync\");\n\nconst RequestHistory = [];\n\nmock('sendHttpRequest',\
   \ function() {\n  const url = arguments[0];\n  const callback = arguments[1];\n\
