@@ -30,3 +30,7 @@ After installing the template, you will then configure the events and parameters
 ## Verify Events API x GTM Integration
 See <i>Verify TikTok Events API Setup</i> section in this [developer document](https://business-api.tiktok.com/portal/docs?id=1799004129683458). <br>
 If you have any feature requests / issues, please file a issue in this [Github repository](https://github.com/tiktok/gtm-template-eapi/issues).
+
+## Change Logs
+- V0.2.01
+  - Support parsing data layer GA4 recommended events
