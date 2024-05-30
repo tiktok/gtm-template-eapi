@@ -13,7 +13,7 @@ You can leverage Google Tag Manager's [server-side tagging](https://developers.g
 
 ## Template Installation
 ### (Recommended) Install using Events Manager interactive setup flow
-We recommend setting up Events API x GTM Integration using TikTok Events Manager's interactive setup flow. The interactive flow guides you in configuring the integration and automatically installs this template as well as all other necessary tags, triggers, and variables to help simply the integration. To get started, see our [developer document](https://business-api.tiktok.com/portal/docs?id=1799004052020225).
+We recommend setting up Events API x GTM Integration using TikTok Events Manager's interactive setup flow. The interactive flow guides you in configuring the integration and automatically installs this template as well as all other necessary tags, triggers, and variables to help simplify the integration. To get started, see our [developer document](https://business-api.tiktok.com/portal/docs?id=1799004052020225).
 
 ### Install from GTM Template Gallery
 If you prefer to install the template and configure your integration manaully, you can find this template in [GTM Template Gallery](https://tagmanager.google.com/gallery/#/owners/tiktok/templates/gtm-template-eapi) and add it into your GTM workspace. Note that the template can only be applied to a Server container.
