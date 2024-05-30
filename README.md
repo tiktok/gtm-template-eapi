@@ -4,11 +4,11 @@
 
 
 ## About TikTok Events API
-TikTok Events API is designed to give our advertisers a reliable connection between TikTok and advertiser marketing data (servers, website, app, or CRM) while also providing the flexibility for advertisers to customize the information they share with TikTok. Sharing these events with TikTok helps marketing teams measure ad performance on TikTok, optimize ad delivery, and create target audiences. [Learn more](https://ads.tiktok.com/help/article/events-api) about Events API.
+TikTok Events API is designed to give our advertisers a reliable connection (server-to-server) between TikTok and advertiser marketing data while also providing the flexibility for advertisers to customize the information they share with TikTok. Sharing these events with TikTok helps marketing teams measure ad performance on TikTok, optimize ad delivery, and create target audiences. [Learn more](https://ads.tiktok.com/help/article/events-api) about Events API.
 <br><br>
 
 ## About Events API x GTM Integration
-You can leverage Google Tag Manager's [server-side tagging](https://developers.google.com/tag-platform/tag-manager/server-side/intro) to send website events to TikTok through a server-to-server connection. This template parses events received by your tagging server, converts them to TikTok events and sends to TikTok Events API.
+You can leverage Google Tag Manager's [server-side tagging](https://developers.google.com/tag-platform/tag-manager/server-side/intro) to send website events to TikTok through a server-to-server connection. This template parses events received by your tagging server, converts them to TikTok events and sends them to the TikTok Events API.
 <br><br>
 
 ## Template Installation
@@ -29,7 +29,7 @@ After installing the template, you will then configure the events and parameters
 
 ## Verify Events API x GTM Integration
 See <i>Verify TikTok Events API Setup</i> section in this [developer document](https://business-api.tiktok.com/portal/docs?id=1799004129683458). <br>
-If you have any feature requests / issues, please file a issue in this [Github repository](https://github.com/tiktok/gtm-template-eapi/issues).
+If you have any feature requests or issues, please file an issue in this [Github repository](https://github.com/tiktok/gtm-template-eapi/issues).
 
 ## Change Logs
 - V0.2.01
